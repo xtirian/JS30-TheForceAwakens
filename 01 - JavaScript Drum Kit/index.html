@@ -10,7 +10,7 @@
 
 <body>
 
-  <!-- I needed to change all the data-key codes because in my keyboard are showing different codes, so i'll change A(65)-> 97 || S(83)->115 || D(68)->100 || F(70)-> 102 || G(71)->103 || H(72)-> 104 || J(74)-> 106 || K(75)-> 107 || L(76)-> 108 || 
+  <!-- I had to change all the data-key codes because in my keyboard are showing different codes, so i'll change A(65)-> 97 || S(83)->115 || D(68)->100 || F(70)-> 102 || G(71)->103 || H(72)-> 104 || J(74)-> 106 || K(75)-> 107 || L(76)-> 108 || 
 I don't know if it stands for my keyboard brands only, but to work I had to change  -->
 
   <div class="keys">
@@ -79,10 +79,11 @@ I don't know if it stands for my keyboard brands only, but to work I had to chan
     });
 
     function playSound(keyCode) {
-      const allSounds = Array.from(document.querySelectorAll("Audio"));
+      const allSounds = Array.from(document.querySelectorAll("audio"));
 
       let selectedSound = allSounds.filter(sound => (sound.dataset.key == keyCode))
 
+      //Added the load to every time I press the key, the it restart the sound and play again, so I can press repeatedly. 
       selectedSound[0].load()
       selectedSound[0].play()
     }
