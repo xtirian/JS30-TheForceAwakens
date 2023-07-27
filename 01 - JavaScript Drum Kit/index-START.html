@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>JS Drum Kit</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="https://fav.farm/🔥" />
+</head>
+
+<body>
+
+  <!-- I needed to change all the data-key codes because in my keyboard are showing different codes, so i'll change A(65)-> 97 || S(83)->115 || D(68)->100 || F(70)-> 102 || G(71)->103 || H(72)-> 104 || J(74)-> 106 || K(75)-> 107 || L(76)-> 108 || 
+I don't know if it stands for my keyboard brands only, but to work I had to change  -->
+
+  <div class="keys">
+    <div data-key="97" class="key">
+      <kbd>A</kbd>
+      <span class="sound">clap</span>
+    </div>
+    <div data-key="115" class="key">
+      <kbd>S</kbd>
+      <span class="sound">hihat</span>
+    </div>
+    <div data-key="100" class="key">
+      <kbd>D</kbd>
+      <span class="sound">kick</span>
+    </div>
+    <div data-key="102" class="key">
+      <kbd>F</kbd>
+      <span class="sound">openhat</span>
+    </div>
+    <div data-key="103" class="key">
+      <kbd>G</kbd>
+      <span class="sound">boom</span>
+    </div>
+    <div data-key="104" class="key">
+      <kbd>H</kbd>
+      <span class="sound">ride</span>
+    </div>
+    <div data-key="106" class="key">
+      <kbd>J</kbd>
+      <span class="sound">snare</span>
+    </div>
+    <div data-key="107" class="key">
+      <kbd>K</kbd>
+      <span class="sound">tom</span>
+    </div>
+    <div data-key="108" class="key">
+      <kbd>L</kbd>
+      <span class="sound">tink</span>
+    </div>
+
+    <footer class="author">
+      <p>Challenge from <a href="https://javascript30.com/">JavaScript30</a>. Coded by <a href="https://github.com/xtirian">xTirian</a>.</p>
+    </footer>
+  </div>
+
+  <audio data-key="97" src="sounds/clap.wav"></audio>
+  <audio data-key="115" src="sounds/hihat.wav"></audio>
+  <audio data-key="100" src="sounds/kick.wav"></audio>
+  <audio data-key="102" src="sounds/openhat.wav"></audio>
+  <audio data-key="103" src="sounds/boom.wav"></audio>
+  <audio data-key="104" src="sounds/ride.wav"></audio>
+  <audio data-key="106" src="sounds/snare.wav"></audio>
+  <audio data-key="107" src="sounds/tom.wav"></audio>
+  <audio data-key="108" src="sounds/tink.wav"></audio>
+
+
+
+
+  <script>
+    document.addEventListener('keypress', (event) => {
+      var name = event.key;
+      var code = event.keyCode;
+
+      lightUpKey(code)
+      playSound(code)
+    });
+
+    function playSound(keyCode) {
+      const allSounds = Array.from(document.querySelectorAll("Audio"));
+
+      let selectedSound = allSounds.filter(sound => (sound.dataset.key == keyCode))
+
+      selectedSound[0].load()
+      selectedSound[0].play()
+    }
+
+    function lightUpKey(keyCode) {
+      const allDivs = Array.from(document.querySelectorAll("div"));
+
+      let selectedDiv = allDivs.filter(div => (div.dataset.key == keyCode))
+
+      selectedDiv[0].classList.add('playing')
+
+      setTimeout(() => { selectedDiv[0].classList.remove('playing') }, 100)
+
+    }
+
+
+  </script>
+</body>
+
+</html>
