@@ -23,7 +23,7 @@ A clock builded with CSS and animeted with JS
 
 ### Links
 
-- Solution URL: [Git Repository](https://github.com/xtirian/JS30-TheForceAwakens/tree/main/01%20-%20JavaScript%20Drum%20Kit)
+- Solution URL: [Git Repository](https://github.com/xtirian/JS30-TheForceAwakens/tree/main/02%20-%20JS%20and%20CSS%20Clock)
 - Live Site URL: [🔥 JS Drum Kit](https://js-clock-rust.vercel.app/)
 
 ## My process
@@ -31,77 +31,32 @@ A clock builded with CSS and animeted with JS
 ### Built with
 
 - JavaScript
-- Event Listener KeyPress
-- Audio DOM Manipulation
+- transform-origin, transform, trasition and trasition-timing-function
+- DOM Manipulation
 
 ### What I learned
 
-I always like to wrote in a paper what I thought that would be the algorithm behind the funcionality, and I divided this in three parts:
+In this project I noted that we needed to do 3 things:
 
-- identify the keyboard keys pressed
-- play the current sound
-- change the current div that is pressed
+- Get the time
+- calculate what degree it correspond to the actul time
+- DOM Manipulating to set the time in the screen
 
-The first thing I learned was the "data-*" attribute.
+The first thing I learned was the "transform-origin" attribute.
 
-```html
-<div data-key="97" class="key">
-  <kbd>A</kbd>
-  <span class="sound">clap</span>
-</div>
-<!-- ... -->
-<audio data-key="97" src="sounds/clap.wav"></audio>
-```
-
-It was easy to see that I could use this information to uniform the data. So, I just had to identify the keyboard key and associate this to an audio and a div with the same data-key.
-
-The problem I found was that the data-key in the starter-pack didn't work in my PC. So I searched for a way to discover the key codes and found out the "keyCode" property. So in my event listener I wrote:
-
-```js
-document.addEventListener("keypress", (event) => {
-  var code = event.keyCode;
-  console.log(code);
-});
-```
-
-and pick the codes from the console. So with the right codes I changed the HTML and my event listener worked well. With this info I started the second part, that is play the sound.
-1- This part was kind easy, I selected all the sounds with the query selector and created an Array with all the querys
-2- I used the Array.filter() to look inside the querys what query had the same data-key that was pressed and identified by the listener. To do that I had to call the "dataset" property.
-
-```js
-function playSound(keyCode) {
-  let allSounds = [
-   //An Array of <audio data-key="97" src="sounds/clap.wav"></audio>
-  ]
-  let selectedSound = allSounds.filter(sound => (sound.dataset.key == keyCode));
+```css
+.hand {
+  transform-origin: 100%;
 }
-
- //Added the load() to every time I press the key, the it restart the sound and play again, so I can press repeatedly. 
-selectedSound[0].load()
-selectedSound[0].play()
 ```
-3- To finish, I took the key code and called the function that changes the classes to give the light effect. The logic behind the filter was the same for me so I just had to add the class "playing" to this element to change his style. But I faced one problem, when I pressed a Key onceone time, the style changed static and didn't came back. So I thought the better solution was put a time out that, every time the function was called and the "playing" style was added, 100 milisecods after, the "playing" style should removed. So I add and remove the class to create an effect like the "button-selector:active" in the CSS.
+it allows you to change the axle of the transformation in this element for his end, so the rotation axle will be the center of the clock. Without it, the element rotates in it self, because the default is the origin in 50%
 
-```js
-function lightUpKey(keyCode) {
-      const allDivs = [
-       // Array of divs <div data-key="97" class="key"> ...
-      ]
-      
-      let selectedDiv = [
-       //returned an array with only the div with the keyCode <div data-key="97" class="key">
-      ]
+The next thing was the transition-timing-function, that gives you differents types of animation during the trasition. I should remember this propoerty so I could use when animating an progress bar
 
-      selectedDiv[0].classList.add('playing')
+In the script, it was pretty easy to get the results. Just a remider, when you are using "getElement" or "querySelector", that could return more the one element, the system will return as a node list or an array EVEN if there is only one element to return. So you have to put the "[0]" to define that you want the first element not the array.
 
-      setTimeout(() => { selectedDiv[0].classList.remove('playing') }, 100)
 
-    }
-```
 ### Useful resources
-
-- [Article - Introduction to Keyboard Events in JavaScript](https://www.section.io/engineering-education/keyboard-events-in-javascript/)
-- [Documentation - Using data attributes](https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes)
 
 ## Author
 

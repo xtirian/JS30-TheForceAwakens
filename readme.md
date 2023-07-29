@@ -7,7 +7,8 @@ These are the Starter Files for the JavaScript 30 Day Challenge. You can also gr
 ## Table of Contents
 
 - [Overview](#overview)
-- [01 - Drum Kit](#drum-kit)
+- [01 - Drum Kit](#drum-kit) 
+- [02 - Clock](#clock) 
 
 ## Overview
 
@@ -21,5 +22,12 @@ I'll avoid to change my original code after I see the videos, but if I see that 
 
 A Drum Kit played with the keyboard. This project uses event listener keyboard
 
-- Solution URL: [Add solution URL here](https://github.com/xtirian/JS30-TheForceAwakens/tree/main/01%20-%20JavaScript%20Drum%20Kit)
-- Live Site URL: [Add live site URL here](https://xtirian-js30-drum.vercel.app/)
+- Solution URL: [Git Repository](https://github.com/xtirian/JS30-TheForceAwakens/tree/main/01%20-%20JavaScript%20Drum%20Kit)
+- Live Site URL: [🔥 JS Drum Kit](https://xtirian-js30-drum.vercel.app/)
+
+## Clock
+
+A Drum Kit played with the keyboard. This project uses event listener keyboard
+
+- Solution URL: [Git Repository](https://github.com/xtirian/JS30-TheForceAwakens/tree/main/02%20-%20JS%20and%20CSS%20Clock)
+- Live Site URL: [🔥 JS Drum Kit](https://js-clock-rust.vercel.app/)
