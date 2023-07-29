@@ -70,13 +70,7 @@ I don't know if it stands for my keyboard brands only, but to work I had to chan
 
 
   <script>
-    document.addEventListener('keypress', (event) => {
-      var name = event.key;
-      var code = event.keyCode;
 
-      lightUpKey(code)
-      playSound(code)
-    });
 
     function playSound(keyCode) {
       const allSounds = Array.from(document.querySelectorAll("audio"));
@@ -84,8 +78,9 @@ I don't know if it stands for my keyboard brands only, but to work I had to chan
       let selectedSound = allSounds.filter(sound => (sound.dataset.key == keyCode))
 
       //Added the load to every time I press the key, the it restart the sound and play again, so I can press repeatedly. 
-      selectedSound[0].load()
-      selectedSound[0].play()
+      //Professor hint: changed the load for the "currentTime"
+      selectedSound[0].currentTime = 0;
+      selectedSound[0].play();
     }
 
     function lightUpKey(keyCode) {
@@ -99,6 +94,13 @@ I don't know if it stands for my keyboard brands only, but to work I had to chan
 
     }
 
+    document.addEventListener('keypress', (event) => {
+      var name = event.key;
+      var code = event.keyCode;
+
+      lightUpKey(code)
+      playSound(code)
+    });
 
   </script>
 </body>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>JS + CSS Clock</title>
+  <link rel="icon" href="https://fav.farm/🔥" />
+</head>
+
+<body>
+
+
+  <div class="clock">
+    <div class="clock-face">
+      <div class="hand hour-hand"></div>
+      <div class="hand min-hand"></div>
+      <div class="hand second-hand"></div>
+    </div>
+  </div>
+
+  <footer class="author">
+    <p>Challenge from <a href="https://javascript30.com/">JavaScript30</a>. Coded by <a href="https://github.com/xtirian">xTirian</a>.</p>
+  </footer>
+
+  <style>
+    html {
+      background: #018DED url(https://unsplash.it/1500/1000?image=881&blur=5);
+      background-size: cover;
+      font-family: 'helvetica neue';
+      text-align: center;
+      font-size: 10px;
+    }
+
+    body {
+      margin: 0;
+      font-size: 2rem;
+      display: flex;
+      flex: 1;
+      min-height: 100vh;
+      align-items: center;
+    }
+
+    .clock {
+      width: 30rem;
+      height: 30rem;
+      border: 20px solid white;
+      border-radius: 50%;
+      margin: 50px auto;
+      position: relative;
+      padding: 2rem;
+      box-shadow:
+        0 0 0 4px rgba(0, 0, 0, 0.1),
+        inset 0 0 0 3px #EFEFEF,
+        inset 0 0 10px black,
+        0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .clock-face {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform: translateY(-3px);
+      /* account for the height of the clock hands */
+
+      transform: rotate(90deg)
+        /* change the initial point to the 0 h && 12 h */
+    }
+
+    .hand {
+      width: 50%;
+      height: 6px;
+      background: black;
+      position: absolute;
+      top: 50%;
+
+      border-radius: 50%;
+
+      transform-origin: 100%;
+      /* this changes the axle of the element for the end, so the rotation axle will be the center of the clock. Without it, the element rotates in it self, because the default is the origin in 50% */
+
+
+      /* This was to give some animation effect of tik-tak  in the clock, but when it reach 59 sec, instead of go on to 0, the animation gone backward to the 0*/
+      /* transition: all 0.05;
+      transition-timing-function: cubic-bezier(.1, 2.7, 0.58, 1); */
+
+    }
+
+    .hour-hand {
+      width: 50%;
+      height: 12px;
+    }
+
+    .second-hand {
+      background-color: plum;
+    }
+
+    .author {
+      position: absolute;
+      bottom: 0;
+
+      display: flex;
+      justify-content: center;
+
+      color: #018DED;
+      font-size: 1.5rem;
+
+      text-shadow: 0 0 1.5rem;
+
+    }
+
+    .author a {
+      color: white
+    }
+  </style>
+
+  <script>
+
+    function setClock(hour, min, sec) {
+
+      // Just a remider, when you are picking an element that could return more the one, the system will return as a node list or an array EVEN if there is only one return. so you have to put the "[0]" to define that you want the first element not the array.
+      document.getElementsByClassName('hour-hand')[0].style.transform = `rotate(${hour}deg)`;
+
+      document.getElementsByClassName('min-hand')[0].style.transform = `rotate(${min}deg)`;
+
+      document.getElementsByClassName('second-hand')[0].style.transform = `rotate(${sec}deg)`;
+
+
+    }
+
+    function calcDeg(time, hour) {
+
+
+      if (hour == true) { // check if is hour
+
+        if (time >= 12) { // the computer hour normally gets the 24h standart while the analogic clock has 12 hours. So this condition is to decrease the 12 if the the hours in computer are between the hour 12 and 23:59.
+
+          return ((360 / 12) * (time - 12))
+
+        } else {
+
+          return ((360 / 12) * time)
+
+        }
+        //the solution if the time is for minute or second
+      } else {
+
+        return (time * (360 / 60))
+
+      }
+
+    }
+
+    // There was a problem with the timer when it reset. Instead of just continue, the timer is going back to the initial point. Ther are two ways to solve that, removing the trasition in the momento on the trasnformation from 360 for 6, but this will cost us the visual effect. So, in the matter of the fact that no one will pass his life here watching this clock, I'll adjust the trasnition
+
+
+    function getHour() {
+
+      const today = new Date()
+
+      let actualHour = calcDeg(today.getHours(), true) //instead of create an line for the hour and the call the functions, I'll call the funcion inside this var so I can already use his value to manipulate the DOM
+      let actualMinute = calcDeg(today.getMinutes(), false)
+      let actualSecond = calcDeg(today.getSeconds(), false)
+
+
+
+      console.log(actualSecond)
+
+      setClock(actualHour, actualMinute, actualSecond)
+
+    }
+
+
+    setInterval(getHour, 1000);
+
+  </script>
+</body>
+
+</html>
