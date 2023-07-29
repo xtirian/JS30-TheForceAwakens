@@ -1,4 +1,4 @@
-# JS - Drum Kit
+# JS - Clock
 
 This is a solution from [JS + CSS Clock Challenge](https://javascript30.com/). JavaScript30 is a chain of challenges that help you improve your coding and problem solving skills with JS.
 
